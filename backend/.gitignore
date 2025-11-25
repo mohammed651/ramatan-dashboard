@@ -1,0 +1,73 @@
+# ============================================
+# General
+# ============================================
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# ============================================
+# PHP Project Files
+# ============================================
+vendor/
+composer.lock
+
+# Ignore environment variables and secrets
+.env
+.env.local
+.env.dev
+.env.production
+
+# Sensitive configs (if any accidentally created)
+config.local.php
+config.php.bak
+*.secret
+*.key
+
+# ============================================
+# Logs & Cache
+# ============================================
+logs/
+cache/
+*.log
+*.cache
+
+# PHP error logs
+php_errors.log
+error_log
+
+# ============================================
+# Runtime & Temporary Files
+# ============================================
+/tmp/
+*.tmp
+*.swp
+*.swo
+
+# ============================================
+# Node / Front-end (if front-end is part of repo)
+# ============================================
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# ============================================
+# IDEs / Editors
+# ============================================
+# VSCode
+.vscode/
+
+# PHPStorm / JetBrains
+.idea/
+
+# NetBeans
+nbproject/private/
+
+# Sublime
+*.sublime-workspace
+*.sublime-project
+
+# ============================================
+# OS / System folders
+# ============================================
+__MACOSX/

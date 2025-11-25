@@ -1,0 +1,118 @@
+# =====================================================
+# GLOBAL GITIGNORE FOR FULL WEB PROJECT
+# Backend (PHP) + Frontend (React) + Database Files
+# =====================================================
+
+# -------------------------------------
+# Environment variables / Secrets
+# -------------------------------------
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+*.env
+
+# -------------------------------------
+# PHP / Backend
+# -------------------------------------
+vendor/
+composer.lock
+
+# Sensitive configs
+config.local.php
+config.php.bak
+*.secret
+*.key
+*.pem
+
+# Logs
+logs/
+*.log
+*.cache
+php_errors.log
+error_log
+
+# Cache / Temp
+cache/
+tmp/
+temp/
+*.tmp
+*.swp
+*.swo
+
+# Upload folders (optional - لو عندك رفع صور)
+uploads/
+storage/
+
+# -------------------------------------
+# Node / Frontend
+# -------------------------------------
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+.pnp/
+.pnp.js
+
+# Dist / Build
+dist/
+build/
+out/
+*.map
+
+# -------------------------------------
+# Database files
+# -------------------------------------
+*.sql.bak
+*.sql.gz
+*.sql.zip
+*.dump
+*.bak
+
+# لو عايز تمنع رفع SQL كله (اختياري)
+# database/*.sql
+
+# -------------------------------------
+# System Files (Windows / Mac / Linux)
+# -------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# -------------------------------------
+# IDE / Editors
+# -------------------------------------
+# VSCode
+.vscode/
+
+# PhpStorm / JetBrains
+.idea/
+
+# Sublime
+*.sublime-workspace
+*.sublime-project
+
+# NetBeans
+nbproject/private/
+
+# -------------------------------------
+# Python (لو مستخدم أدوات Python)
+# -------------------------------------
+__pycache__/
+*.pyc
+
+# -------------------------------------
+# Tools / Scripts (اختياري)
+# -------------------------------------
+tools/*.log
+tools/*.bak
+
+# لمنع رفع سكربتات الخطر (زي db installer)
+tools/install-*.php
+tools/setup-*.php
+tools/create-admin.php
+
+# =====================================================
+# END
+# =====================================================

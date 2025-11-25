@@ -1,0 +1,527 @@
+{
+  "info": {
+    "name": "Ramatan Developments API",
+    "description": "Complete API testing for Ramatan Developments Dashboard - Real Estate Management System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost/ramatan-dashboard/backend/api",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "🔐 Authentication",
+      "item": [
+        {
+          "name": "Login - Admin",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"123456\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login.php",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "login.php"]
+            },
+            "description": "Login as admin user to get JWT token"
+          },
+          "response": []
+        },
+        {
+          "name": "Login - Sales",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"ahmed\",\n  \"password\": \"123456\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login.php",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "login.php"]
+            },
+            "description": "Login as sales user"
+          },
+          "response": []
+        },
+        {
+          "name": "Validate Token",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/validate-token.php",
+              "host": ["{{base_url}}"],
+              "path": ["validate-token.php"]
+            },
+            "description": "Validate JWT token and get user info"
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/auth/logout.php",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "logout.php"]
+            },
+            "description": "Logout user (token remains valid until expiry)"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🏢 Projects Management",
+      "item": [
+        {
+          "name": "Get All Projects",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/projects/index.php",
+              "host": ["{{base_url}}"],
+              "path": ["projects", "index.php"]
+            },
+            "description": "Get list of all projects"
+          },
+          "response": []
+        },
+        {
+          "name": "Add New Project",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"برج الأندلس\",\n  \"location\": \"المعادي، القاهرة\",\n  \"description\": \"برج سكني فاخر في قلب المعادي\",\n  \"amenities\": \"جيم - سبا - أمن - مواقف\",\n  \"status\": \"قيد الإنشاء\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/projects/add.php",
+              "host": ["{{base_url}}"],
+              "path": ["projects", "add.php"]
+            },
+            "description": "Add a new project (Admin only)"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Project",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1,\n  \"name\": \"برج النخيل المتميز\",\n  \"status\": \"تم التسليم\",\n  \"amenities\": \"مسجد - سبا - جيم - أمن 24 ساعة - مواقف سيارات - حدائق\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/projects/update.php",
+              "host": ["{{base_url}}"],
+              "path": ["projects", "update.php"]
+            },
+            "description": "Update project details"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Project",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/projects/delete.php?id=4",
+              "host": ["{{base_url}}"],
+              "path": ["projects", "delete.php"],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "4"
+                }
+              ]
+            },
+            "description": "Delete a project (Admin only)"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🏠 Units Management",
+      "item": [
+        {
+          "name": "Get All Units",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/units/index.php",
+              "host": ["{{base_url}}"],
+              "path": ["units", "index.php"]
+            },
+            "description": "Get list of all units with project details"
+          },
+          "response": []
+        },
+        {
+          "name": "Add New Unit",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"project_id\": 1,\n  \"unit_number\": \"A301\",\n  \"unit_type\": \"شقة\",\n  \"area\": 140.5,\n  \"price\": 1600000,\n  \"bedrooms\": 3,\n  \"bathrooms\": 2,\n  \"floor\": 10,\n  \"features\": \"مكيف - مطبخ مجهز - شرفة - إطلالة مميزة\",\n  \"status\": \"متاحة\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/units/add.php",
+              "host": ["{{base_url}}"],
+              "path": ["units", "add.php"]
+            },
+            "description": "Add a new unit to a project"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Unit",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1,\n  \"price\": 1250000,\n  \"status\": \"محجوزة\",\n  \"features\": \"مكيف - مطبخ مجهز - شرفة - إطلالة على المدينة الرياضية - تكييف مركزي\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/units/update.php",
+              "host": ["{{base_url}}"],
+              "path": ["units", "update.php"]
+            },
+            "description": "Update unit details"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Unit",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/units/delete.php?id=8",
+              "host": ["{{base_url}}"],
+              "path": ["units", "delete.php"],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "8"
+                }
+              ]
+            },
+            "description": "Delete a unit"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "💰 Operations & Sales",
+      "item": [
+        {
+          "name": "Get All Operations",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/operations/index.php",
+              "host": ["{{base_url}}"],
+              "path": ["operations", "index.php"]
+            },
+            "description": "Get all sales operations (Admin sees all, Sales see only their operations)"
+          },
+          "response": []
+        },
+        {
+          "name": "Add New Operation - Booking",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"unit_id\": 1,\n  \"customer_name\": \"علي محمود\",\n  \"customer_phone\": \"01117778899\",\n  \"operation_type\": \"حجز\",\n  \"amount\": 150000,\n  \"payment_method\": \"كاش\",\n  \"contract_number\": \"RES-2024-003\",\n  \"notes\": \"حجز مبدئي - استلام المتبقي خلال 45 يوم\",\n  \"operation_date\": \"2024-02-10\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/operations/add.php",
+              "host": ["{{base_url}}"],
+              "path": ["operations", "add.php"]
+            },
+            "description": "Add a new booking operation"
+          },
+          "response": []
+        },
+        {
+          "name": "Add New Operation - Sale",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"unit_id\": 4,\n  \"customer_name\": \"نادية سعيد\",\n  \"customer_phone\": \"01118889900\",\n  \"operation_type\": \"بيع\",\n  \"amount\": 3500000,\n  \"payment_method\": \"تقسيط\",\n  \"contract_number\": \"CON-2024-003\",\n  \"notes\": \"تم البيع بنظام التقسيط على 4 سنوات\",\n  \"operation_date\": \"2024-02-12\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/operations/add.php",
+              "host": ["{{base_url}}"],
+              "path": ["operations", "add.php"]
+            },
+            "description": "Add a new sale operation"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Operation",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 2,\n  \"status\": \"مكتمل\",\n  \"notes\": \"تم استلام المبلغ بالكامل - جاهز لتسليم العقد\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/operations/update.php",
+              "host": ["{{base_url}}"],
+              "path": ["operations", "update.php"]
+            },
+            "description": "Update operation status and details"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "📊 Dashboard & Reports",
+      "item": [
+        {
+          "name": "Get Dashboard Statistics",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/dashboard/stats.php",
+              "host": ["{{base_url}}"],
+              "path": ["dashboard", "stats.php"]
+            },
+            "description": "Get comprehensive dashboard statistics and KPIs"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "👥 Users Management",
+      "item": [
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/users/index.php",
+              "host": ["{{base_url}}"],
+              "path": ["users", "index.php"]
+            },
+            "description": "Get list of all users (Admin only)"
+          },
+          "response": []
+        },
+        {
+          "name": "Add New User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"maha\",\n  \"password\": \"123456\",\n  \"email\": \"maha.sales@ramatan.com\",\n  \"phone\": \"01000000005\",\n  \"full_name\": \"مها عبدالرحمن\",\n  \"role\": \"sales\",\n  \"commission_rate\": 2.8\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/users/add.php",
+              "host": ["{{base_url}}"],
+              "path": ["users", "add.php"]
+            },
+            "description": "Add a new user (Admin only)"
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "console.log('Running test for: ' + pm.request.name);"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "pm.test(\"Status code is 200\", function () {",
+          "    pm.response.to.have.status(200);",
+          "});",
+          "",
+          "pm.test(\"Response has success true\", function () {",
+          "    var jsonData = pm.response.json();",
+          "    pm.expect(jsonData.success).to.be.true;",
+          "});"
+        ]
+      }
+    }
+  ]
+}
